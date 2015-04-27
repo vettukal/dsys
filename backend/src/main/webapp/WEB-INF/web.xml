@@ -13,7 +13,9 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.iiitd.hostel.backend.MyEndpoint, com.iiitd.hostel.backend.QuoteEndpoint</param-value>
+            <param-value>com.iiitd.hostel.backend.MyEndpoint,
+                com.iiitd.hostel.backend.QuoteEndpoint, com.iiitd.hostel.backend.ItemEndpoint,
+                com.iiitd.hostel.backend.CartEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
