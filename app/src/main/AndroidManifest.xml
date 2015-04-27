@@ -10,17 +10,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".DrawerActivities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_main_activity2" >
         </activity>
 
         <meta-data
@@ -30,6 +26,39 @@
         <activity
             android:name=".QuoteActivity"
             android:label="@string/title_activity_quote" >
+        </activity>
+        <activity
+            android:name=".DrawerActivities.ItemList"
+            android:label="@string/title_activity_item_list"
+            android:parentActivityName=".DrawerActivities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iiitd.hostel.DrawerActivities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DrawerActivities.Pick_Item"
+            android:label="@string/title_activity_pick__item"
+            android:parentActivityName=".DrawerActivities.ItemList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iiitd.hostel.DrawerActivities.ItemList" />
+        </activity>
+
+        <activity
+            android:name=".DrawerActivities.Collaborators"
+            android:label="@string/title_activity_collaborators"
+            android:parentActivityName=".DrawerActivities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iiitd.hostel.DrawerActivities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DrawerActivities.Logout"
+            android:label="@string/title_activity_logout"
+            android:parentActivityName=".DrawerActivities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iiitd.hostel.DrawerActivities.MainActivity" />
         </activity>
     </application>
 

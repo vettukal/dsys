@@ -1,0 +1,215 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.ruchika.dsysbasiclayout.Pick_Item"
+    android:id="@+id/rellayoutpick_item">
+
+    <TextView android:text="@string/pick_item" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. Bread"
+        android:id="@+id/txtBread"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/textView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editBread"
+        android:layout_alignBottom="@+id/txtBread"
+        android:layout_alignRight="@+id/textView"
+        android:inputType="number"
+        android:text="0" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="+"
+        android:textColor="#FF2129"
+        android:textSize="20sp"
+        android:id="@+id/btnBread"
+        android:background="@drawable/plus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignBottom="@+id/editBread"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2. Butter"
+        android:id="@+id/txtButter"
+        android:layout_alignBottom="@+id/editButter"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editButter"
+        android:layout_below="@+id/editBread"
+        android:layout_alignRight="@+id/textView"
+        android:inputType="number"
+        android:text="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3. Eggs"
+        android:id="@+id/txtEggs"
+        android:layout_alignBottom="@+id/editEggs" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editEggs"
+        android:layout_below="@+id/editButter"
+        android:layout_alignRight="@+id/textView"
+        android:inputType="number"
+        android:text="0" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="+"
+        android:textColor="#FF2129"
+        android:textSize="20sp"
+        android:id="@+id/btnButter"
+        android:background="@drawable/plus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignBottom="@+id/editButter"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="+"
+        android:textColor="#FF2129"
+        android:textSize="20sp"
+        android:id="@+id/btnEggs"
+        android:background="@drawable/plus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignBottom="@+id/editEggs"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editMilk"
+        android:layout_below="@+id/btnEggs"
+        android:layout_alignLeft="@+id/editEggs"
+        android:inputType="number"
+        android:text="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4. Milk"
+        android:id="@+id/txtMilk"
+        android:layout_alignBottom="@+id/editMilk" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="+"
+        android:textColor="#FF2129"
+        android:textSize="20sp"
+        android:id="@+id/btnMilk"
+        android:background="@drawable/plus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignBottom="@+id/editMilk"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="-"
+        android:textColor="#35FF1F"
+        android:textSize="20sp"
+        android:id="@+id/btnminusButter"
+        android:background="@drawable/minus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignTop="@+id/btnButter"
+        android:layout_alignLeft="@+id/btnminusBread"
+        android:layout_alignStart="@+id/btnminusBread" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="-"
+        android:textColor="#35FF1F"
+        android:textSize="20sp"
+        android:id="@+id/btnminusBread"
+        android:background="@drawable/minus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignTop="@+id/btnBread"
+        android:layout_toLeftOf="@+id/imgbtncorrect"
+        android:layout_toStartOf="@+id/imgbtncorrect" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="-"
+        android:textColor="#35FF1F"
+        android:textSize="20sp"
+        android:id="@+id/btnminusEggs"
+        android:background="@drawable/minus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignTop="@+id/btnEggs"
+        android:layout_toLeftOf="@+id/imgbtncorrect"
+        android:layout_toStartOf="@+id/imgbtncorrect" />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="-"
+        android:textColor="#35FF1F"
+        android:textSize="20sp"
+        android:id="@+id/btnminusMilk"
+        android:background="@drawable/minus_sign"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_alignTop="@+id/btnMilk"
+        android:layout_toLeftOf="@+id/imgbtncorrect"
+        android:layout_toStartOf="@+id/imgbtncorrect" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imgbtncorrect"
+        android:src="@drawable/correctcompress"
+        android:onClick="AddtoList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

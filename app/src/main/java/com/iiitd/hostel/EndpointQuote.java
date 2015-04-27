@@ -26,7 +26,7 @@ public class EndpointQuote extends AsyncTask<Void, Void, List<Quote>> {
     private static QuoteApi myApiService = null;
     private Context context;
 
-    EndpointQuote(Context context) {
+    public EndpointQuote(Context context) {
         this.context = context;
     }
 

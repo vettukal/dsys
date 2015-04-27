@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hostel</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -29,4 +29,31 @@
     <string name="request_server_auth_code">Request server auth code?</string>
     <string name="configuration_error">Error: the value of WEB_CLIENT_ID or SERVER_BASE_URL is not  set correctly. This will cause errors when requesting a server auth code.</string>
     <string name="title_activity_quote">QuoteActivity</string>
+    <string name="title_activity_item_list">ItemList</string>
+    <string name="title_activity_pick__item">Pick_Item</string>
+
+
+        <string name="app_name">DSys Basic Layout</string>
+
+        <string name="title_section1">Home</string>
+        <string name="title_section2">Add Collaorators</string>
+        <string name="title_section3">Grocery List</string>
+        <string name="title_section4">Exit</string>
+
+        <string name="navigation_drawer_open">Open navigation drawer</string>
+        <string name="navigation_drawer_close">Close navigation drawer</string>
+
+        <string name="action_example">Example action</string>
+
+
+        <string name="pick_item">Choose your items...</string>
+        <string name="title_activity_collaborators">Collaborators</string>
+
+        <string name="item_list">Your Grocery List...</string>
+        <string name="title_activity_history">History</string>
+        <string name="title_activity_new_list">Create List</string>
+        <string name="title_activity_logout">Logout</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
 </resources>

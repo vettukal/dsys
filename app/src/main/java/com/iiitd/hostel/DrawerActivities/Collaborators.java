@@ -1,33 +1,25 @@
-package com.iiitd.hostel;
+package com.iiitd.hostel.DrawerActivities;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.iiitd.hostel.R;
 
-public class MainActivity extends ActionBarActivity {
+public class Collaborators extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // adding to test the toast message of Google Endpoints.
-        //new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
-
-        Intent intent = new Intent(this,QuoteActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_collaborators);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_collaborators, menu);
         return true;
     }
 
