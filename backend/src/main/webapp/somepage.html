@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script>
+      
+
+      function makeRequest() { // delete the quote word below and then check
+        gapi.client.quoteApi.listQuote().execute(function(resp) {
+            console.log(resp);
+        });
+      }
+
+      function init() {
+        var ROOT = 'https://dsys-project.appspot.com/_ah/api';
+		gapi.client.load('quoteApi', 'v1', function() {
+			makeRequest();
+		}, ROOT);
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+</head>
+<body>
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+alert('inserting new element');
+    gapi.client.quoteApi.insertQuote({
+ "itemId": 421,
+ "quantity": 3,
+ "what": "odomos1",
+ "who": "anurag"
+}).execute(function(resp) {
+        console.log(resp);
+    });
+}
+</script>
+
+</body>
+</html>
