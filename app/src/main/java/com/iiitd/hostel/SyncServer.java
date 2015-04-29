@@ -73,7 +73,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
 
     private void putInLocalDB(List<Quote> addList) {
         // ruchika you have to do it.
-        // This list<qoute> has to be added to the database.
+        // This list<qoute> has to be added to the local database.
 
     }
 
