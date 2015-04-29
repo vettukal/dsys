@@ -13,6 +13,7 @@ import com.iiitd.hostel.Database.ListDetails;
 import com.iiitd.hostel.Database.ListOperations;
 import com.iiitd.hostel.EndpointQuote;
 import com.iiitd.hostel.R;
+import com.iiitd.hostel.SyncServer;
 
 import java.util.List;
 
@@ -48,8 +49,7 @@ public class ItemList extends ActionBarActivity {
     }
 
     public void Sync(View v){
-
-        new EndpointQuote(this).execute();
+        new SyncServer(this).execute();
     }
 
     private void updateUI() {
