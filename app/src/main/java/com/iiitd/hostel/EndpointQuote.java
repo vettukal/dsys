@@ -61,6 +61,15 @@ public class EndpointQuote extends AsyncTask<Void, Void, List<Quote>> {
 
             myApiService = builder.build();
 
+            QuoteConnector qc = new QuoteConnector(0);
+            List<Quote> serverDB = null;
+            try {
+                serverDB = qc.listQuote();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             // adding the extra quote to the system.
 
             // ending the experiment.

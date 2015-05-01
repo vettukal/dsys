@@ -45,17 +45,22 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             e.printStackTrace();
         }
 
-        for(Quote q: serverDB){
-            Log.d("vince serversync","number is: "+q.getItemId());
+        if(serverDB!=null){
+            for(Quote q: serverDB){
+                Log.d("vince serversync","number is: "+q.getItemId());
+            }
+
+
+            // Now we have to compare both and add it to localDB.
+
+            addToLocalDB(localDB,serverDB); addToLocalDB(localDB,serverDB);
         }
 
+        // adding to server.
+        addToServer(localDB,serverDB);
         // Now we have to compare the both the local and server side and then make the stuff.
 
-        addToServer(localDB,serverDB);
 
-        // Now we have to compare both and add it to localDB.
-
-        addToLocalDB(localDB,serverDB);
         return null;
     }
 
@@ -94,6 +99,21 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     }
 
     private void addToServer(List<Quote> localDB, List<Quote> serverDB) {
+        if(serverDB==null){
+            QuoteConnector qc = new QuoteConnector(0);
+            List<Quote> addList = localDB;
+            for (Quote q:addList){
+                try{
+                    //Log.d("vince SyncServer nt local:",""+q.getItemId());
+                    qc.insertQuote(q);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            return;
+        }
         List<Quote> addList = new ArrayList<>();
         for(Quote localQ: localDB){
             boolean isFound  = false;

@@ -66,4 +66,8 @@ public class QuoteConnector {
     public Quote updateQuote(Quote quote) throws Exception {
         return myApiService.updateQuote(quote).execute();
     }
+
+    public void removeQuote(Long id) throws Exception{
+         myApiService.removeQuote(id).execute();
+    }
 }
