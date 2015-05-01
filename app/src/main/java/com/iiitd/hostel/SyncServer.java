@@ -122,7 +122,11 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                     isFound = true;
                 }
             }
-         addList.add(localQ);
+            if(isFound){
+                addList.add(localQ);
+            }
+
+
         }
 
         // Now got the list of Quotes which are there in local DB but there in ServerDB
