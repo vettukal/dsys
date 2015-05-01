@@ -65,6 +65,16 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     }
 
     private void addToLocalDB(List<Quote> localDB, List<Quote> serverDB) {
+        for(Quote q: localDB){
+            Log.d("vince syncserver","addToLocalDB local id:"+q.getItemId()+" "+q.getQuantity());
+        }
+
+        if(serverDB!=null){
+            for(Quote q: serverDB){
+                Log.d("vince syncserver","addToLocalDB server id:"+q.getItemId()+" "+q.getQuantity());
+            }
+        }
+
         List<Quote> addList = new ArrayList<>();
         for(Quote serverQ: serverDB){
             boolean isFound  = false;
@@ -77,7 +87,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 addList.add(serverQ);
         }
         Log.i("Before putInLocalDB", " hello");
-        putInLocalDB(addList);
+        //putInLocalDB(addList);
     }
 
     private void putInLocalDB(List<Quote> addList) {
@@ -100,6 +110,17 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     }
 
     private void addToServer(List<Quote> localDB, List<Quote> serverDB) {
+        for(Quote q: localDB){
+            Log.d("vince syncserver","addToServerDB local id:"+q.getItemId()+" "+q.getQuantity());
+        }
+
+        if(serverDB!=null){
+            for(Quote q: serverDB){
+                Log.d("vince syncserver","addToServerDB server id:"+q.getItemId()+" "+q.getQuantity());
+            }
+        }
+
+
         if(serverDB==null){
             QuoteConnector qc = new QuoteConnector(0);
             List<Quote> addList = localDB;
@@ -135,7 +156,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             }
             if(!isFound){
                 Log.d("vince syncsercer","adding to server"+localQ.getItemId());
-               
+
                 addList.add(localQ);
             }
             if(!isUpdate){
@@ -148,8 +169,12 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         QuoteConnector qc = new QuoteConnector(0);
         for (Quote q:addList){
             try{
-                //Log.d("vince SyncServer nt local:",""+q.getItemId());
-                qc.insertQuote(q);
+                Log.d("vince SyncServer :","inserting into server"+q.getItemId()+" id is:"+q.getId());
+                Quote insq = new Quote();
+                insq.setItemId(q.getItemId());
+                insq.setQuantity(q.getQuantity());
+                Log.d("vince SyncServer :","inserting into server"+q.getItemId()+" insq id is:"+insq.getId());
+                qc.insertQuote(insq);
             }
             catch (Exception e){
                 e.printStackTrace();
