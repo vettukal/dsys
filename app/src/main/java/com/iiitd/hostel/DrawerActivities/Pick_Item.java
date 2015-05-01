@@ -10,16 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.iiitd.hostel.Database.ListDetails;
 import com.iiitd.hostel.Database.ListOperations;
 import com.iiitd.hostel.R;
+
+import java.util.List;
 
 public class Pick_Item extends ActionBarActivity {
 
     Context context;
-    Button btnBread,btnButter,btnMilk,btnEggs;
-    Button btnminusBread,btnminusButter,btnminusEggs,btnminusMilk;
-    EditText editBread, editButter, editMilk, editEggs;
-    private int quantbread,quantmilk,quantbutter,quanteggs;
+    Button btnBread,btnButter,btnMilk,btnEggs,btnCheese;
+    Button btnminusBread,btnminusButter,btnminusEggs,btnminusMilk,btnminusCheese;
+    EditText editBread, editButter, editMilk, editEggs, editCheese;
+    private int quantbread,quantmilk,quantbutter,quanteggs,quantcheese;
     private int[] Quant;
     int i;
 
@@ -37,12 +40,45 @@ public class Pick_Item extends ActionBarActivity {
 
     public void StoreValue() {
 
-        Quant = new int[20];
+        //Quant = new int[20];
+
+        ListOperations lstDBoperation;
+        lstDBoperation = new ListOperations(getApplicationContext());
+        lstDBoperation.open();
+        List<ListDetails> list = lstDBoperation.getAllItems();
 
         editBread = (EditText) findViewById(R.id.editBread);
         editEggs = (EditText) findViewById(R.id.editEggs);
         editButter = (EditText) findViewById(R.id.editButter);
         editMilk = (EditText) findViewById(R.id.editMilk);
+        editCheese = (EditText) findViewById(R.id.editCheese);
+
+        for (int j = 1; j <= 5; j++){
+            if (list.size() == j) {
+                for(int k=0;k<j;k++) {
+                    if (list.get(k).getItem_Id() == 0) {
+                        editBread.setText(String.valueOf(list.get(k).getQuantity()));
+
+                    }
+                    if (list.get(k).getItem_Id() == 1) {
+                        editButter.setText(String.valueOf(list.get(k).getQuantity()));
+
+                    }
+                    if (list.get(k).getItem_Id() == 2) {
+                        editEggs.setText(String.valueOf(list.get(k).getQuantity()));
+
+                    }
+                    if (list.get(k).getItem_Id() == 3) {
+                        editMilk.setText(String.valueOf(list.get(k).getQuantity()));
+
+                    }
+                    if (list.get(k).getItem_Id() == 4) {
+                        editCheese.setText(String.valueOf(list.get(k).getQuantity()));
+
+                    }
+                }
+            }
+        }
 
         btnBread = (Button) findViewById(R.id.btnBread);
         btnBread.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +121,17 @@ public class Pick_Item extends ActionBarActivity {
 
             }
         });
+        btnCheese = (Button) findViewById(R.id.btnCheese);
+        btnCheese.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                plus(editCheese);
+
+            }
+        });
+
         btnminusBread = (Button) findViewById(R.id.btnminusBread);
         btnminusBread.setOnClickListener(new View.OnClickListener(){
 
@@ -125,16 +172,26 @@ public class Pick_Item extends ActionBarActivity {
 
             }
         });
+        btnminusCheese = (Button) findViewById(R.id.btnminusEggs);
+        btnminusCheese.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
 
-        quantbread = Integer.parseInt(editBread.getText().toString());
+                minus(editCheese);
+
+            }
+        });
+        lstDBoperation.close();
+
+       /* quantbread = Integer.parseInt(editBread.getText().toString());
         Quant[0] = quantbread;
         quantbutter = Integer.parseInt(editButter.getText().toString());
         Quant[1] = quantbutter;
         quanteggs = Integer.parseInt(editEggs.getText().toString());
         Quant[2] = quanteggs;
         quantmilk = Integer.parseInt(editMilk.getText().toString());
-        Quant[3] = quantmilk;
+        Quant[3] = quantmilk;*/
     }
 
     public void plus(EditText editText){
@@ -163,12 +220,24 @@ public class Pick_Item extends ActionBarActivity {
     public void AddtoList(View v){
 
 
-        StoreValue();
-        String[] ItemsArray = {"Bread", "Butter", "Eggs", "Milk"}; ;
+        //StoreValue();
+        Quant = new int[20];
+        quantbread = Integer.parseInt(editBread.getText().toString());
+        Quant[0] = quantbread;
+        quantbutter = Integer.parseInt(editButter.getText().toString());
+        Quant[1] = quantbutter;
+        quanteggs = Integer.parseInt(editEggs.getText().toString());
+        Quant[2] = quanteggs;
+        quantmilk = Integer.parseInt(editMilk.getText().toString());
+        Quant[3] = quantmilk;
+        quantcheese = Integer.parseInt(editCheese.getText().toString());
+        Quant[4] = quantcheese;
+
+        String[] ItemsArray = {"Bread", "Butter", "Eggs", "Milk","Cheese"};
         ListOperations listDBoperation;
         listDBoperation = new ListOperations(context);
         listDBoperation.open();
-        for(i=0;i<4;i++) {
+        for(i=0;i<5;i++) {
 
             if(Quant[i]>0) {
 

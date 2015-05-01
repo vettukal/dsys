@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.iiitd.hostel.Database.ListDetails;
 import com.iiitd.hostel.Database.ListOperations;
-import com.iiitd.hostel.EndpointQuote;
 import com.iiitd.hostel.R;
 import com.iiitd.hostel.SyncServer;
 
@@ -49,10 +48,15 @@ public class ItemList extends ActionBarActivity {
     }
 
     public void Sync(View v){
+
         new SyncServer(this).execute();
+        Intent itemlist = new Intent(this, ItemList.class);
+        startActivity(itemlist);
+
+
     }
 
-    private void updateUI() {
+    public void updateUI() {
 
         List<ListDetails> list = listFromDB();
         ListDetails [] objs= new ListDetails[list.size()];

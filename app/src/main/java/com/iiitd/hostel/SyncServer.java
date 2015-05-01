@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.iiitd.hostel.Database.ListOperations;
 import com.iiitd.hostel.Database.LocalDatabase;
 import com.iiitd.hostel.backend.quoteApi.model.Quote;
 
@@ -18,6 +19,8 @@ import java.util.List;
 
 public class SyncServer extends AsyncTask<Void,Void,String> {
     private Context context;
+    int ItemId, quant;
+
 
     public SyncServer(Context context) {
         this.context = context;
@@ -67,14 +70,27 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             }
             addList.add(serverQ);
         }
-
+        Log.i("Before putInLocalDB", " hello");
         putInLocalDB(addList);
     }
 
     private void putInLocalDB(List<Quote> addList) {
-        // ruchika you have to do it.
-        // This list<qoute> has to be added to the local database.
 
+        //int ItemId = addList.get(1).getItemId();
+        //int quantity = addList.get(1).getItemId();
+        String[] ItemsArray = {"Bread", "Butter", "Eggs", "Milk","Cheese","Chips","Jam","Orange Juice"};
+        for(int i=0;i<addList.size();i++) {
+
+            ListOperations listDBoperation;
+            listDBoperation = new ListOperations(context);
+            listDBoperation.open();
+            ItemId = addList.get(i).getItemId();
+            quant = addList.get(i).getQuantity();
+
+            //change ItemsArray[3] to ItemsArray[ItemId]
+            listDBoperation.addItem(ItemId, ItemsArray[ItemId], quant);
+
+        }
     }
 
     private void addToServer(List<Quote> localDB, List<Quote> serverDB) {
@@ -93,7 +109,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         QuoteConnector qc = new QuoteConnector(0);
         for (Quote q:addList){
             try{
-                Log.d("vince SyncServer nt local:",""+q.getItemId());
+                //Log.d("vince SyncServer nt local:",""+q.getItemId());
                 qc.insertQuote(q);
             }
             catch (Exception e){

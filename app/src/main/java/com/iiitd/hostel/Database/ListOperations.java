@@ -21,6 +21,7 @@ public class ListOperations {
     private ListDBHelper dbHelper;
     private String[] LIST_TABLE_COLUMNS = {ListDBHelper.ID,ListDBHelper.Item_ID,ListDBHelper.Item_Name,ListDBHelper.Item_Quant};
     private SQLiteDatabase database;
+    int item_id_cursor;
 
     public ListOperations(Context context) {
         dbHelper = new ListDBHelper(context);
@@ -35,19 +36,39 @@ public class ListOperations {
     }
 
     public void addItem(int item_id, String name,int quantity) {
+
         ContentValues values = new ContentValues();
 
+        Cursor c = database.query(ListDBHelper.LIST,LIST_TABLE_COLUMNS, null, null, null, null, null);
+        item_id_cursor = c.getColumnIndex(ListDBHelper.Item_ID);
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            if (item_id == c.getInt(item_id_cursor)) {
+
+                System.out.println("Item_Quant" + c.getInt(c.getColumnIndex(ListDBHelper.Item_Quant)));
+                System.out.println(quantity);
+                values.put(ListDBHelper.Item_Quant,quantity);
+                database.update(ListDBHelper.LIST, values, ListDBHelper.Item_ID + "=" + c.getInt(item_id_cursor), null );
+                return;
+
+            }
+        }
         /*Cursor cursor = database.query(ListDBHelper.LIST,
                 LIST_TABLE_COLUMNS, ListDBHelper.Item_ID + " = "
                         + item_id, null, null, null,null,null);
 
         quantity = cursor.getInt(3)+quantity;
         cursor.moveToFirst();*/
+        String query = "Select * FROM " + ListDBHelper.LIST;
 
+
+        /*List<ListDetails> list= new ArrayList<ListDetails>();
+        Cursor cursor = database.rawQuery(query, null);
+
+        cursor.moveToFirst();*/
+        Log.i("Values normally", "inserted ");
         values.put(ListDBHelper.Item_ID,item_id);
         values.put(ListDBHelper.Item_Name,name);
         values.put(ListDBHelper.Item_Quant,quantity);
-
 
         long Id = database.insert(ListDBHelper.LIST, null, values);
         // database.insert(DiscussionObjectHelper.DISCUSSION, null, values);
