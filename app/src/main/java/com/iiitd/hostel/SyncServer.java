@@ -135,7 +135,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             }
             if(!isFound){
                 Log.d("vince syncsercer","adding to server"+localQ.getItemId());
-                localQ.setId(updateId);
+               
                 addList.add(localQ);
             }
             if(!isUpdate){
