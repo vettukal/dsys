@@ -70,9 +70,16 @@ public class EndpointQuote extends AsyncTask<Void, Void, List<Quote>> {
             }
 
 
-            // adding the extra quote to the system.
+           // trying to delete the quote
+            for(Quote q: serverDB){
+                try{
+                    qc.removeQuote(q.getId());
+                }
+                catch (Exception e){
 
-            // ending the experiment.
+                }
+
+            }
         }
 
         try {

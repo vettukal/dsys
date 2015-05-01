@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.iiitd.hostel.Database.ListDetails;
 import com.iiitd.hostel.Database.ListOperations;
+import com.iiitd.hostel.EndpointQuote;
 import com.iiitd.hostel.R;
 import com.iiitd.hostel.SyncServer;
 
@@ -49,7 +50,7 @@ public class ItemList extends ActionBarActivity {
 
     public void Sync(View v){
 
-        new SyncServer(this).execute();
+        new SyncServer(this).execute(); //new EndpointQuote(this).execute();
         Intent itemlist = new Intent(this, ItemList.class);
         startActivity(itemlist);
 
