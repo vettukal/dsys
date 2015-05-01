@@ -120,6 +120,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         for(Quote localQ: localDB){
             boolean isFound  = false;
             boolean isUpdate = false;
+            long updateId = 0;
             for(Quote serverQ: serverDB){
                 if((localQ.getItemId()==serverQ.getItemId()) && (localQ.getQuantity()==serverQ.getQuantity())){
                     Log.d("vince syncserver","addToserver is found"+localQ.getItemId()+":"+localQ.getQuantity());
@@ -129,6 +130,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 if((localQ.getItemId()==serverQ.getItemId()) && (localQ.getQuantity()!=serverQ.getQuantity())){
                     Log.d("vince syncserver","update Server found"+localQ.getItemId()+":"+localQ.getQuantity());
                     isFound = true;
+                    updateId = serverQ.getId();
                 }
             }
             if(!isFound){
@@ -136,6 +138,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 addList.add(localQ);
             }
             if(!isUpdate){
+                localQ.setId(updateId);
                 updateList.add(localQ);
             }
         }
