@@ -111,7 +111,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                     e.printStackTrace();
                 }
             }
-
+            Log.d("vince syncServer","addtoServer serverDB is null");
             return;
         }
         List<Quote> addList = new ArrayList<>();
@@ -119,10 +119,12 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             boolean isFound  = false;
             for(Quote serverQ: serverDB){
                 if(localQ.getItemId()==serverQ.getItemId()){
+                    Log.d("vince syncserver","addToserver is found"+localQ.getItemId());
                     isFound = true;
                 }
             }
-            if(isFound){
+            if(!isFound){
+                Log.d("vince syncsercer","adding to server"+localQ.getItemId());
                 addList.add(localQ);
             }
 
