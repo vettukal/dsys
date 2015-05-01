@@ -53,7 +53,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
 
             // Now we have to compare both and add it to localDB.
 
-            addToLocalDB(localDB,serverDB); addToLocalDB(localDB,serverDB);
+            addToLocalDB(localDB,serverDB); 
         }
 
         // adding to server.
