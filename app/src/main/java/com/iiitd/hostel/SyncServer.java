@@ -116,11 +116,18 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             return;
         }
         List<Quote> addList = new ArrayList<>();
+        List<Quote> updateList = new ArrayList<>();
         for(Quote localQ: localDB){
             boolean isFound  = false;
+            boolean isUpdate = false;
             for(Quote serverQ: serverDB){
                 if((localQ.getItemId()==serverQ.getItemId()) && (localQ.getQuantity()==serverQ.getQuantity())){
                     Log.d("vince syncserver","addToserver is found"+localQ.getItemId()+":"+localQ.getQuantity());
+                    isFound = true;
+                    isUpdate = true;
+                }
+                if((localQ.getItemId()==serverQ.getItemId()) && (localQ.getQuantity()!=serverQ.getQuantity())){
+                    Log.d("vince syncserver","update Server found"+localQ.getItemId()+":"+localQ.getQuantity());
                     isFound = true;
                 }
             }
@@ -128,8 +135,9 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 Log.d("vince syncsercer","adding to server"+localQ.getItemId());
                 addList.add(localQ);
             }
-
-
+            if(!isUpdate){
+                updateList.add(localQ);
+            }
         }
 
         // Now got the list of Quotes which are there in local DB but there in ServerDB
@@ -138,6 +146,16 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             try{
                 //Log.d("vince SyncServer nt local:",""+q.getItemId());
                 qc.insertQuote(q);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        for (Quote q:updateList){
+            try{
+                Log.d("vince SyncServer","syncing server updateing"+q.getId());
+                qc.updateQuote(q);
             }
             catch (Exception e){
                 e.printStackTrace();
