@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ public class Pick_Item extends ActionBarActivity {
     EditText editBread, editButter, editMilk, editEggs, editCheese;
     private int quantbread,quantmilk,quantbutter,quanteggs,quantcheese;
     private int[] Quant;
+    long tsLong;
     int i;
 
 
@@ -172,7 +174,7 @@ public class Pick_Item extends ActionBarActivity {
 
             }
         });
-        btnminusCheese = (Button) findViewById(R.id.btnminusEggs);
+        btnminusCheese = (Button) findViewById(R.id.btnminusCheese);
         btnminusCheese.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -237,11 +239,12 @@ public class Pick_Item extends ActionBarActivity {
         ListOperations listDBoperation;
         listDBoperation = new ListOperations(context);
         listDBoperation.open();
+        tsLong = System.currentTimeMillis()/1000;
         for(i=0;i<5;i++) {
 
             if(Quant[i]>0) {
-
-                listDBoperation.addItem(i,ItemsArray[i],Quant[i]);
+                Log.i("timestamp", String.valueOf(tsLong));
+                listDBoperation.addItem(i,ItemsArray[i],tsLong,Quant[i]);
             }
 
         }
