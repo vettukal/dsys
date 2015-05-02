@@ -171,7 +171,7 @@ public class ListOperations {
             dbObject.setQuantity(cursor.getInt(4));
             dbObject.setTimestamp(cursor.getLong(3));
             list.add(dbObject);
-            Log.i("Db values:", cursor.getInt(1) + cursor.getString(2) + cursor.getLong(3) + cursor.getInt(4));
+            Log.i("Db values: ", cursor.getInt(1) + " " + cursor.getString(2) + " " + cursor.getLong(3) + " " + cursor.getInt(4) + " ");
             cursor.moveToNext();
         }
 
