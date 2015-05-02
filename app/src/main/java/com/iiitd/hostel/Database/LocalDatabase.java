@@ -27,6 +27,7 @@ public class LocalDatabase {
             Quote q = new Quote();
             q.setItemId(ld.getItem_Id());
             q.setQuantity(ld.getQuantity());
+            q.setTimeStamp(ld.getTimestamp());
             listquote.add(q);
 
         }

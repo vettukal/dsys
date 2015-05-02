@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.iiitd.hostel.Database.ListDetails;
 import com.iiitd.hostel.Database.ListOperations;
-import com.iiitd.hostel.EndpointQuote;
 import com.iiitd.hostel.R;
 import com.iiitd.hostel.SyncServer;
 
@@ -28,6 +27,13 @@ public class ItemList extends ActionBarActivity {
         setContentView(R.layout.activity_item_list);
         lstitems = (ListView) findViewById(R.id.list_item);
         updateUI();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        updateUI();
+        super.onRestart();
     }
 
     public List listFromDB(){
@@ -48,11 +54,18 @@ public class ItemList extends ActionBarActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        updateUI();
+        super.onStart();
+    }
+
     public void Sync(View v){
 
         new SyncServer(this).execute(); //new EndpointQuote(this).execute();
         Intent itemlist = new Intent(this, ItemList.class);
         startActivity(itemlist);
+        updateUI();
 
 
     }
@@ -78,6 +91,12 @@ public class ItemList extends ActionBarActivity {
         super.onResume();
 
 
+    }
+
+    @Override
+    protected void onPostResume() {
+        updateUI();
+        super.onPostResume();
     }
 
     @Override

@@ -48,15 +48,16 @@ public class ListOperations {
 
                 System.out.println("Item_Quant" + c.getInt(c.getColumnIndex(ListDBHelper.Item_Quant)));
                 System.out.println(quantity);
-                values.put(ListDBHelper.Item_Quant,quantity);
-
-                /*if(timestamp>c.getLong(timestamp_cursor)){
+                if(timestamp>c.getLong(timestamp_cursor)){
 
                     values.put(ListDBHelper.TimeStamp,timestamp);
-                }*/
-
-                database.update(ListDBHelper.LIST, values, ListDBHelper.Item_ID + "=" + c.getInt(item_id_cursor), null );
-                return;
+                    values.put(ListDBHelper.Item_Quant,quantity);
+                    database.update(ListDBHelper.LIST, values, ListDBHelper.Item_ID + "=" + c.getInt(item_id_cursor), null );
+                    return;
+                }
+                if(timestamp<c.getLong(timestamp_cursor)){
+                    return;
+                }
 
             }
         }

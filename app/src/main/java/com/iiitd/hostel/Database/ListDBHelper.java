@@ -26,7 +26,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
             + "(" + ID + " integer primary key autoincrement, "
             + Item_ID + " integer, "
             + Item_Name + " text not null, "
-            + TimeStamp + " long not null, "
+            + TimeStamp + " long, "
             + Item_Quant + " int);";
 
     public ListDBHelper(Context context) {

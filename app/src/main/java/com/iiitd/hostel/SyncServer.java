@@ -35,7 +35,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         LocalDatabase ldb = new LocalDatabase();
         List<Quote> localDB = ldb.getLocalQuotes(context);
         for(Quote q: localDB){
-            Log.d("vince serversync","number from localDB: "+q.getItemId());
+            Log.d("vince serversync","number from localDB: "+q.getItemId() + "timestamp chk" + q.getTimeStamp());
         }
 
         // Fetchng GAE database.
@@ -70,12 +70,12 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     private void addToLocalDB(List<Quote> localDB, List<Quote> serverDB) {
 
         for(Quote q: localDB){
-            Log.d("vince syncserver","addToLocalDB local id:"+q.getItemId()+" "+q.getQuantity());
+            Log.d("vince syncserver","addToLocalDB local id:"+q.getItemId()+" "+q.getQuantity() + " " +q.getTimeStamp());
         }
 
         if(serverDB!=null){
             for(Quote q: serverDB){
-                Log.d("vince syncserver","addToLocalDB server id:"+q.getItemId()+" "+q.getQuantity());
+                Log.d("vince syncserver","addToLocalDB server id:"+q.getItemId()+" "+q.getQuantity() + " " + q.getTimeStamp());
             }
         }
 
@@ -94,11 +94,10 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         Log.i("Before putInLocalDB", " hello");
         for(Quote q: addList){
 
-            Log.d("vince syncserver", " adding into localDB"+ q.getItemId()+" : "+q.getQuantity());
+            Log.d("vince syncserver", " adding into localDB"+ q.getItemId()+" : "+q.getQuantity() + ":" + q.getTimeStamp());
         }
 
         putInLocalDB(addList);
-
 
 
     }
@@ -107,18 +106,21 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
 
         //int ItemId = addList.get(1).getItemId();
         //int quantity = addList.get(1).getItemId();
+        Log.i("Inside putInLocalDB", " yayyayayya " + addList.size());
 
         for(int i=0;i<addList.size();i++) {
 
+            Log.i("Inside putInLocalDB", " inside for loop");
             ListOperations listDBoperation;
             listDBoperation = new ListOperations(context);
             listDBoperation.open();
             ItemId = addList.get(i).getItemId();
             quant = addList.get(i).getQuantity();
-            tsLong = System.currentTimeMillis()/1000;
+            tsLong = addList.get(i).getTimeStamp();
+            Log.i("tsLong + Item_ID", String.valueOf(tsLong) + " " + ItemId);
 
             //change ItemsArray[3] to ItemsArray[ItemId]
-            listDBoperation.addItem(ItemId, ItemsArray[ItemId], tsLong,quant);
+            listDBoperation.addItem(ItemId, ItemsArray[ItemId], tsLong, quant);
 
         }
     }
@@ -140,7 +142,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     }*/
     private void addToServer(List<Quote> localDB, List<Quote> serverDB) {
         for(Quote q: localDB){
-            Log.d("vince syncserver","addToServerDB local id:"+q.getItemId()+" "+q.getQuantity());
+            Log.d("vince syncserver","addToServerDB local id:"+q.getItemId()+" "+q.getQuantity() + " time " + q.getTimeStamp());
         }
 
         if(serverDB!=null){
@@ -185,6 +187,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             }
             if(!isFound){
                 Log.d("vince syncsercer","adding to server"+localQ.getItemId());
+                Log.d("vince syncsercer","local quote timestamp"+localQ.getTimeStamp());
 
                 addList.add(localQ);
             }
@@ -203,7 +206,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 insq.setItemId(q.getItemId());
                 insq.setQuantity(q.getQuantity());
                 insq.setTimeStamp(q.getTimeStamp());
-                Log.d("vince SyncServer :","inserting into server"+q.getItemId()+" insq id is:"+insq.getId());
+                Log.d("vince SyncServer :", "inserting into server" + " insq timestamp is" + insq.getTimeStamp());
                 qc.insertQuote(insq);
             }
             catch (Exception e){
@@ -213,7 +216,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
 
         for (Quote q:updateList){
             try{
-                Log.d("vince SyncServer","syncing server updateing"+q.getId());
+                Log.d("vince SyncServer","syncing server updating"+q.getId());
                 qc.updateQuote(q);
             }
             catch (Exception e){
