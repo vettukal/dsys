@@ -21,7 +21,7 @@ public class ListOperations {
     private ListDBHelper dbHelper;
     private String[] LIST_TABLE_COLUMNS = {ListDBHelper.ID,ListDBHelper.Item_ID,ListDBHelper.Item_Name,ListDBHelper.TimeStamp,ListDBHelper.Item_Quant};
     private SQLiteDatabase database;
-    int item_id_cursor,timestamp_cursor;
+    int item_id_cursor,timestamp_cursor,quantity_cursor;
 
     public ListOperations(Context context) {
         dbHelper = new ListDBHelper(context);
@@ -74,6 +74,60 @@ public class ListOperations {
         Cursor cursor = database.rawQuery(query, null);
 
         cursor.moveToFirst();*/
+        Log.i("Values normally", "inserted ");
+        values.put(ListDBHelper.Item_ID,item_id);
+        values.put(ListDBHelper.Item_Name,name);
+        values.put(ListDBHelper.Item_Quant,quantity);
+        values.put(ListDBHelper.TimeStamp,timestamp);
+
+        long Id = database.insert(ListDBHelper.LIST, null, values);
+        // database.insert(DiscussionObjectHelper.DISCUSSION, null, values);
+
+        // now that the student is created return it ...
+        /*Cursor cursor = database.query(ListDBHelper.LIST,
+                LIST_TABLE_COLUMNS, ListDBHelper.ID + " = "
+                        + Id, null, null, null,null,null);
+        cursor.moveToFirst();
+
+        ListDetails newComment = parseList(cursor);
+        cursor.close();*/
+        //return newComment;
+    }
+
+    public void addItemLocal(int item_id, String name,long timestamp,int quantity) {
+
+        ContentValues values = new ContentValues();
+
+        // Checks if the id already exists in the local DB
+        Cursor c = database.query(ListDBHelper.LIST,LIST_TABLE_COLUMNS, null, null, null, null, null);
+        item_id_cursor = c.getColumnIndex(ListDBHelper.Item_ID);
+        timestamp_cursor = c.getColumnIndex(ListDBHelper.TimeStamp);
+        quantity_cursor = c.getColumnIndex(ListDBHelper.Item_Quant);
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            if (item_id == c.getInt(item_id_cursor)) {
+
+                System.out.println("Item_Quant" + c.getInt(c.getColumnIndex(ListDBHelper.Item_Quant)));
+                System.out.println(quantity);
+                if(quantity == c.getInt(quantity_cursor)){
+                    Log.d("ListOperations","Quantity not changed" );
+                    return;
+                }
+                if(timestamp>c.getLong(timestamp_cursor)){
+
+                    values.put(ListDBHelper.TimeStamp,timestamp);
+                    values.put(ListDBHelper.Item_Quant,quantity);
+                    database.update(ListDBHelper.LIST, values, ListDBHelper.Item_ID + "=" + c.getInt(item_id_cursor), null );
+                    return;
+                }
+                if(timestamp<c.getLong(timestamp_cursor)){
+                    return;
+                }
+
+            }
+        }
+
+        String query = "Select * FROM " + ListDBHelper.LIST;
+
         Log.i("Values normally", "inserted ");
         values.put(ListDBHelper.Item_ID,item_id);
         values.put(ListDBHelper.Item_Name,name);

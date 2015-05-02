@@ -244,7 +244,7 @@ public class Pick_Item extends ActionBarActivity {
 
             if(Quant[i]>0) {
                 Log.i("timestamp", String.valueOf(tsLong));
-                listDBoperation.addItem(i,ItemsArray[i],tsLong,Quant[i]);
+                listDBoperation.addItemLocal(i,ItemsArray[i],tsLong,Quant[i]);
             }
 
         }

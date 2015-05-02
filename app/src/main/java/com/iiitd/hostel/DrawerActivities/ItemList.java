@@ -30,12 +30,6 @@ public class ItemList extends ActionBarActivity {
 
     }
 
-    @Override
-    protected void onRestart() {
-        updateUI();
-        super.onRestart();
-    }
-
     public List listFromDB(){
 
         ListOperations lstDBoperation;
@@ -54,11 +48,7 @@ public class ItemList extends ActionBarActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        updateUI();
-        super.onStart();
-    }
+
 
     public void Sync(View v){
 
@@ -84,20 +74,6 @@ public class ItemList extends ActionBarActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-
-        updateUI();
-        super.onResume();
-
-
-    }
-
-    @Override
-    protected void onPostResume() {
-        updateUI();
-        super.onPostResume();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
