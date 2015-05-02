@@ -20,6 +20,15 @@ public class Quote {
     String what;
     Integer itemId;
     Integer quantity;
+    Long timeStamp;
+
+    public Long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     public Quote() {}
 
