@@ -17,6 +17,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     public static final String Item_ID = "item_id";
     public static final String Item_Name = "name";
     public static final String Item_Quant = "quantity";
+    public static final String TimeStamp = "timestamp";
     private static final String DATABASE_NAME = "List.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -25,6 +26,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
             + "(" + ID + " integer primary key autoincrement, "
             + Item_ID + " integer, "
             + Item_Name + " text not null, "
+            + TimeStamp + " long not null, "
             + Item_Quant + " int);";
 
     public ListDBHelper(Context context) {

@@ -202,6 +202,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 Quote insq = new Quote();
                 insq.setItemId(q.getItemId());
                 insq.setQuantity(q.getQuantity());
+                insq.setTimeStamp(q.getTimeStamp());
                 Log.d("vince SyncServer :","inserting into server"+q.getItemId()+" insq id is:"+insq.getId());
                 qc.insertQuote(insq);
             }
