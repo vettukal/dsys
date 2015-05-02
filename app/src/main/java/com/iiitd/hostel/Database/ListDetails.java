@@ -9,9 +9,18 @@ public class ListDetails {
     private int Item_Id;
     private String Item_name;
     private int Quantity;
+    private long timestamp;
 
     public int getId() {
         return id;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setId(int id) {

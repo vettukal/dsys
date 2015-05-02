@@ -20,6 +20,8 @@ import java.util.List;
 public class SyncServer extends AsyncTask<Void,Void,String> {
     private Context context;
     int ItemId, quant;
+    String[] ItemsArray = {"Bread", "Butter", "Eggs", "Milk","Cheese","Chips","Jam","Orange Juice"};
+    long tsLong;
 
 
     public SyncServer(Context context) {
@@ -57,6 +59,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         }
 
         // adding to server.
+        localDB = ldb.getLocalQuotes(context);
         addToServer(localDB,serverDB);
         // Now we have to compare the both the local and server side and then make the stuff.
 
@@ -65,6 +68,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
     }
 
     private void addToLocalDB(List<Quote> localDB, List<Quote> serverDB) {
+
         for(Quote q: localDB){
             Log.d("vince syncserver","addToLocalDB local id:"+q.getItemId()+" "+q.getQuantity());
         }
@@ -76,6 +80,7 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
         }
 
         List<Quote> addList = new ArrayList<>();
+
         for(Quote serverQ: serverDB){
             boolean isFound  = false;
             for(Quote localQ: localDB){
@@ -87,14 +92,22 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
                 addList.add(serverQ);
         }
         Log.i("Before putInLocalDB", " hello");
-        //putInLocalDB(addList);
+        for(Quote q: addList){
+
+            Log.d("vince syncserver", " adding into localDB"+ q.getItemId()+" : "+q.getQuantity());
+        }
+
+        putInLocalDB(addList);
+
+
+
     }
 
     private void putInLocalDB(List<Quote> addList) {
 
         //int ItemId = addList.get(1).getItemId();
         //int quantity = addList.get(1).getItemId();
-        String[] ItemsArray = {"Bread", "Butter", "Eggs", "Milk","Cheese","Chips","Jam","Orange Juice"};
+
         for(int i=0;i<addList.size();i++) {
 
             ListOperations listDBoperation;
@@ -102,13 +115,29 @@ public class SyncServer extends AsyncTask<Void,Void,String> {
             listDBoperation.open();
             ItemId = addList.get(i).getItemId();
             quant = addList.get(i).getQuantity();
+            tsLong = System.currentTimeMillis()/1000;
+
+            //change ItemsArray[3] to ItemsArray[ItemId]
+            listDBoperation.addItem(ItemId, ItemsArray[ItemId], tsLong,quant);
+
+        }
+    }
+
+   /* private void updateLocalDB(List<Quote> updatedList) {
+
+        for (int i = 0; i < updatedList.size(); i++) {
+
+            ListOperations listDBoperation;
+            listDBoperation = new ListOperations(context);
+            listDBoperation.open();
+            ItemId = updatedList.get(i).getItemId();
+            quant = updatedList.get(i).getQuantity();
 
             //change ItemsArray[3] to ItemsArray[ItemId]
             listDBoperation.addItem(ItemId, ItemsArray[ItemId], quant);
 
         }
-    }
-
+    }*/
     private void addToServer(List<Quote> localDB, List<Quote> serverDB) {
         for(Quote q: localDB){
             Log.d("vince syncserver","addToServerDB local id:"+q.getItemId()+" "+q.getQuantity());
